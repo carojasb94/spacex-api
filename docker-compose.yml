@@ -1,0 +1,19 @@
+version: "3"
+services:
+  spacex-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    depends_on:
+      - mongo-db
+    environment:
+      some: "1"
+    volumes:
+      - ./:/opt/spacex-api
+  mongo-db:
+    image: mongo:5.0
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/mongo:/data/db
